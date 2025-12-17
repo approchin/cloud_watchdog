@@ -1,0 +1,51 @@
+{"timestamp": "2025-12-15T12:29:07.859979", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已重启859次，远超3次阈值，符合通用决策规则第9条：已重启3次以上仍异常 → command: STOP。当前容器状态为running且资源使用正常，但重启次数异常高，表明存在持续崩溃循环问题，需要人工介入调查根本原因。", "action_success": false}
+{"timestamp": "2025-12-15T12:29:47.366763", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且重启次数已达859次，远超3次阈值，符合通用决策规则第9条：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:33:01.566221", "container": null, "fault_type": null, "command": "RESTART", "reason": "容器被标记为 MEMORY_LEAK_SUSPECTED，且日志显示重复的内存压力启动信息，符合内存泄漏特征。根据通用决策规则第6条，执行预防性重启。", "action_success": true}
+{"timestamp": "2025-12-15T12:34:19.676272", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137，running=false），且重启次数已达859次，远超3次阈值，符合规则9：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:34:58.870994", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损。", "action_success": null}
+{"timestamp": "2025-12-15T12:39:43.223833", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且重启次数已达859次，远超3次上限，符合规则9：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:40:17.625385", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "内存使用率89.40%超过严重阈值90%，但容器健康状态正常，根据规则4执行告警", "action_success": null}
+{"timestamp": "2025-12-15T12:40:24.002163", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损。", "action_success": true}
+{"timestamp": "2025-12-15T12:43:30.208517", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且重启次数已达859次，远超3次阈值，符合通用决策规则第9条：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:45:31.506084", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且重启次数已达859次，远超3次上限，符合通用决策规则第9条：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:46:14.601598", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损。", "action_success": true}
+{"timestamp": "2025-12-15T12:46:31.474068", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且已重启859次远超3次阈值，符合通用决策规则第9条：已重启3次以上仍异常 → command: STOP", "action_success": true}
+{"timestamp": "2025-12-15T12:46:38.322056", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已停止（exit_code=137），但日志中仅发现攻击特征（SQL注入、XSS、命令执行尝试），无恶意进程或异常外连，符合Level 1安全事件标准。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-15T12:47:06.873847", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137，running=false），且重启次数已达859次，远超3次阈值，根据规则9应停止容器以防止无限重启循环。", "action_success": true}
+{"timestamp": "2025-12-15T12:47:43.328475", "container": null, "fault_type": null, "command": "STOP", "reason": "容器已崩溃（exit_code=137），且已重启859次远超3次阈值，根据规则9应停止容器防止无限重启循环", "action_success": true}
+{"timestamp": "2025-12-15T12:48:35.482651", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需要立即取证并止损。", "action_success": true}
+{"timestamp": "2025-12-15T15:22:17.719846", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 'xmrig'，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损。", "action_success": true}
+{"timestamp": "2025-12-15T15:22:27.773932", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现SQL注入和命令执行尝试特征（ORA-00933, /etc/passwd），无恶意进程或异常外连，符合Level 1攻击尝试特征。根据规则，仅日志攻击特征应标记为ATTACK_ATTEMPT并仅告警，严禁COMMIT/STOP以防防御过当。", "action_success": null}
+{"timestamp": "2025-12-15T15:23:51.726867", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需要立即取证并止损", "action_success": true}
+{"timestamp": "2025-12-15T15:24:06.140865", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现攻击特征（SQL注入、XSS），无恶意进程或异常外连，符合安全响应Level 1（攻击尝试/扫描）。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-15T15:26:37.914933", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 'xmrig'，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损", "action_success": true}
+{"timestamp": "2025-12-15T15:26:46.596481", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现攻击特征（SQL注入、XSS），无恶意进程或异常外连，符合安全响应Level 1（攻击尝试/扫描）。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-15T15:39:38.320005", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 'xmrig'，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损。", "action_success": true}
+{"timestamp": "2025-12-15T15:39:46.754484", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中发现SQL注入攻击特征（' OR '1'='1），符合Level 1安全事件特征（仅日志特征，无恶意进程/异常外连），按规则执行ALERT_ONLY", "action_success": null}
+{"timestamp": "2025-12-15T15:42:52.903570", "container": null, "fault_type": null, "command": "COMMIT", "reason": "发现恶意进程 xmrig，符合安全响应分级规则 Level 2（攻击成功/失陷），需立即取证并止损", "action_success": true}
+{"timestamp": "2025-12-15T15:43:07.362768", "container": null, "fault_type": null, "command": "STOP", "reason": "容器进程反复崩溃（exit_code=1），日志显示'Simulating crash!'，且已重启7次超过3次阈值，根据通用决策规则第9条应停止容器", "action_success": true}
+{"timestamp": "2025-12-15T15:43:14.290646", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现SQL注入和XSS攻击特征（如UNION SELECT、<script>alert(1)</script>），无恶意进程或异常外连，符合Level 1安全事件特征。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-16T13:59:22.432372", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T13:59:22.948425", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T13:59:23.463738", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T13:59:23.463875", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T13:59:23.463956", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T14:00:16.616869", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T14:00:17.132084", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T14:00:17.647452", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T14:00:17.647658", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T14:00:17.647763", "container": null, "fault_type": null, "command": null, "reason": null, "action_success": null}
+{"timestamp": "2025-12-16T19:54:08.675038", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "API Key 未配置，仅告警", "action_success": null}
+{"timestamp": "2025-12-16T19:54:40.490742", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "API Key 未配置，仅告警", "action_success": null}
+{"timestamp": "2025-12-16T19:57:33.875165", "container": null, "fault_type": null, "command": "COMMIT", "reason": "规则引擎检测到高危安全事件: 发现恶意进程: ['xmrig']", "action_success": true}
+{"timestamp": "2025-12-16T19:57:44.731750", "container": null, "fault_type": null, "command": "STOP", "reason": "容器频繁重启 (7次)，触发熔断保护", "action_success": true}
+{"timestamp": "2025-12-16T19:57:52.302734", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现攻击特征（XSS和SQL注入尝试），无恶意进程或异常外连证据，符合安全响应Level 1（攻击尝试/扫描）特征。根据规则，仅需告警，严禁COMMIT/STOP以防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-16T20:07:22.873662", "container": null, "fault_type": null, "command": "COMMIT", "reason": "规则引擎检测到高危安全事件: 发现恶意进程: ['xmrig']", "action_success": true}
+{"timestamp": "2025-12-16T20:07:30.838594", "container": null, "fault_type": null, "command": "STOP", "reason": "容器频繁重启 (6次)，触发熔断保护", "action_success": true}
+{"timestamp": "2025-12-16T20:07:37.916185", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但根据安全响应分级规则，仅发现日志中的攻击特征（SQL注入和XSS），无恶意进程或异常外连，属于Level 1攻击尝试。严禁COMMIT/STOP以防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-16T20:09:00.478549", "container": null, "fault_type": null, "command": "COMMIT", "reason": "规则引擎检测到高危安全事件: 发现恶意进程: ['xmrig']", "action_success": true}
+{"timestamp": "2025-12-16T20:09:08.654943", "container": null, "fault_type": null, "command": "STOP", "reason": "容器频繁重启 (6次)，触发熔断保护", "action_success": true}
+{"timestamp": "2025-12-16T20:09:16.056773", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现攻击特征（SQL注入、命令执行尝试、XSS），无恶意进程或异常外连证据，符合安全响应Level 1（攻击尝试/扫描）。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}
+{"timestamp": "2025-12-16T20:30:49.174312", "container": null, "fault_type": null, "command": "COMMIT", "reason": "规则引擎检测到高危安全事件: 发现恶意进程: ['xmrig']", "action_success": true}
+{"timestamp": "2025-12-16T20:30:53.099696", "container": null, "fault_type": null, "command": "STOP", "reason": "容器频繁重启 (6次)，触发熔断保护", "action_success": true}
+{"timestamp": "2025-12-16T20:31:00.094702", "container": null, "fault_type": null, "command": "ALERT_ONLY", "reason": "容器已退出（exit_code=137），但日志中仅发现攻击特征（命令注入和XSS尝试），无恶意进程或异常外连，符合Level 1安全事件特征。根据规则，仅告警不重启/停止，防止防御过当。", "action_success": null}

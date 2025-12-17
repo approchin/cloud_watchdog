@@ -1,0 +1,129 @@
+# ============================================
+# 扩展测试场景 - 包含更多典型故障场景
+# ============================================
+# 使用方法:
+# docker-compose -f docker-compose.extended.yml up -d
+# ============================================
+
+version: '3.8'
+
+services:
+  # ========== 基础场景 (继承自原配置) ==========
+  
+  # 正常容器
+  normal-app:
+    build:
+      context: ./normal-app
+    container_name: normal-app
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+
+  # CPU压力
+  cpu-stress:
+    build:
+      context: ./cpu-stress
+    container_name: cpu-stress
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+
+  # 内存压力
+  memory-leak:
+    build:
+      context: ./memory-leak
+    container_name: memory-leak
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    environment:
+      - MEMORY_LIMIT=200
+
+  # 崩溃容器
+  crash-loop:
+    build:
+      context: ./crash-loop
+    container_name: crash-loop
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.2
+    environment:
+      - CRASH_INTERVAL=5
+
+  # ========== 新增：安全测试场景 ==========
+  
+  # 安全模拟容器 (模拟注入、恶意进程)
+  security-simulation:
+    build:
+      context: ./security-simulation
+    container_name: security-simulation
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+    # 需要 cap_add 才能修改进程名或进行某些网络操作
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+
+  # 健康检查失败
+  unhealthy-app:
+    build:
+      context: ./unhealthy-app
+    container_name: unhealthy-app
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.2
+    ports:
+      - "8080:8080"
+    environment:
+      - FAIL_RATE=0
+
+  # ========== 扩展场景 ==========
+  
+  # OOM测试容器 - 会被OOM Killer杀掉
+  oom-test:
+    build:
+      context: ./oom-test
+    container_name: oom-test
+    restart: "no"  # 不自动重启，方便收集OOM状态
+    mem_limit: 64m
+    cpus: 0.2
+    environment:
+      - ALLOC_MEMORY=100  # 尝试分配100M，超过64M limit
+
+  # CPU极限压力 - 持续100%
+  cpu-extreme:
+    build:
+      context: ./cpu-stress
+    container_name: cpu-extreme
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+    command: ["/bin/sh", "-c", "stress-ng --cpu 8 --timeout 0"]  # 8个worker争抢0.5核
+
+  # 内存极限压力 - 接近limit
+  memory-extreme:
+    build:
+      context: ./memory-leak
+    container_name: memory-extreme
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    environment:
+      - MEMORY_LIMIT=250  # 250M / 256M = 97.6%
+
+  # 频繁重启容器 - 测试熔断
+  restart-loop:
+    build:
+      context: ./crash-loop
+    container_name: restart-loop
+    restart: always  # 自动重启以累积重启次数
+    mem_limit: 64m
+    cpus: 0.2
+    environment:
+      - CRASH_INTERVAL=10  # 每10秒崩溃一次
+
+# 网络配置
+networks:
+  default:
+    name: watchdog-test-network

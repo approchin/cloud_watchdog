@@ -1,0 +1,122 @@
+# ============================================
+# Cloud Watchdog 监控容器列表
+# ============================================
+# 在此配置需要监控的容器
+
+containers:
+  # 示例：正常应用容器
+  - name: "normal-app"
+    enabled: true
+    description: "正常应用容器"
+    # 健康检查配置
+    health_check:
+      type: "command"
+      command: "echo ok"
+      expected_output: "ok"
+      timeout_seconds: 5
+    # 资源阈值（覆盖全局配置）
+    thresholds:
+      cpu_percent_warning: 70
+      cpu_percent_critical: 85
+      memory_percent_warning: 70
+      memory_percent_critical: 85
+    # 处理策略
+    policy:
+      auto_restart: true
+      restart_delay_seconds: 5
+      priority: 2
+
+  # 示例：CPU 压力测试容器
+  - name: "cpu-stress"
+    enabled: true
+    description: "CPU 压力测试容器"
+    health_check:
+      type: "command"
+      command: "echo ok"
+      expected_output: "ok"
+      timeout_seconds: 5
+    thresholds:
+      cpu_percent_warning: 60
+      cpu_percent_critical: 80
+      memory_percent_warning: 70
+      memory_percent_critical: 85
+    policy:
+      auto_restart: true
+      restart_delay_seconds: 5
+      priority: 2
+
+  # 示例：内存压力测试容器
+  - name: "memory-leak"
+    enabled: true
+    description: "内存压力测试容器"
+    health_check:
+      type: "command"
+      command: "echo ok"
+      expected_output: "ok"
+      timeout_seconds: 5
+    thresholds:
+      cpu_percent_warning: 70
+      cpu_percent_critical: 85
+      memory_percent_warning: 60
+      memory_percent_critical: 80
+    policy:
+      auto_restart: true
+      restart_delay_seconds: 5
+      priority: 2
+
+  # 示例：崩溃测试容器
+  - name: "crash-loop"
+    enabled: true
+    description: "崩溃测试容器"
+    health_check:
+      type: "command"
+      command: "echo ok"
+      expected_output: "ok"
+      timeout_seconds: 5
+    thresholds:
+      cpu_percent_warning: 70
+      cpu_percent_critical: 85
+      memory_percent_warning: 70
+      memory_percent_critical: 85
+    policy:
+      auto_restart: true
+      restart_delay_seconds: 3
+      priority: 1
+
+  # 示例：HTTP 服务容器
+  - name: "unhealthy-app"
+    enabled: true
+    description: "HTTP 服务容器"
+    health_check:
+      type: "http"
+      endpoint: "http://localhost:8080/health"
+      expected_status: 200
+      timeout_seconds: 5
+    thresholds:
+      cpu_percent_warning: 70
+      cpu_percent_critical: 85
+      memory_percent_warning: 70
+      memory_percent_critical: 85
+    policy:
+      auto_restart: true
+      restart_delay_seconds: 5
+      priority: 2
+
+  # 示例：安全模拟容器
+  - name: "security-simulation"
+    enabled: true
+    description: "安全模拟容器"
+    health_check:
+      type: "command"
+      command: "echo ok"
+      expected_output: "ok"
+      timeout_seconds: 5
+    thresholds:
+      cpu_percent_warning: 70
+      cpu_percent_critical: 85
+      memory_percent_warning: 70
+      memory_percent_critical: 85
+    policy:
+      auto_restart: false
+      restart_delay_seconds: 5
+      priority: 1

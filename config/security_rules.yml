@@ -1,0 +1,36 @@
+# Cloud Watchdog 安全规则知识库
+# 用于定义恶意行为的特征，支持动态热加载
+
+# 1. 日志注入攻击特征 (Log Injection Signatures)
+# 只要日志中出现以下字符串，即视为潜在攻击
+log_patterns:
+  sql_injection:
+    - "UNION SELECT"
+    - "syntax error"
+    - "ORA-"           # Oracle 错误
+    - "MySQL Error"
+    - "SQL syntax"
+  
+  command_injection:
+    - "/etc/passwd"
+    - "cat /flag"
+    - "whoami"
+    - "wget http"
+    - "curl http"
+  
+  xss_attack:
+    - "<script>"
+    - "alert(1)"
+    - "javascript:"
+    - "onerror="
+
+# 2. 恶意进程黑名单 (Malicious Process Blacklist)
+# 只要容器内运行了以下进程名，即视为被入侵
+process_blacklist:
+  - "xmrig"      # 门罗币挖矿
+  - "minerd"     # 通用挖矿
+  - "nmap"       # 扫描工具
+  - "sqlmap"     # 注入工具
+  - "hydra"      # 爆破工具
+  - "nc -e"      # 反弹 Shell 特征
+  - "bash -i"    # 反弹 Shell 特征

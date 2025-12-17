@@ -1,0 +1,62 @@
+# ============================================
+# 故障模拟容器 - 用于测试 Cloud Watchdog
+# ============================================
+# 使用方法:
+# docker-compose up -d
+# ============================================
+
+version: '3.8'
+
+services:
+  # 正常容器 - 用于对比测试
+  normal-app:
+    build:
+      context: ./normal-app
+    container_name: normal-app
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+
+  # CPU 压力容器
+  cpu-stress:
+    build:
+      context: ./cpu-stress
+    container_name: cpu-stress
+    restart: unless-stopped
+    mem_limit: 128m
+    cpus: 0.5
+
+  # 内存压力容器
+  memory-leak:
+    build:
+      context: ./memory-leak
+    container_name: memory-leak
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    environment:
+      - MEMORY_LIMIT=200
+
+  # 随机崩溃容器
+  crash-loop:
+    build:
+      context: ./crash-loop
+    container_name: crash-loop
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.2
+    environment:
+      - CRASH_INTERVAL=60
+
+  # HTTP 健康检查容器（可模拟不健康）
+  unhealthy-app:
+    build:
+      context: ./unhealthy-app
+    container_name: unhealthy-app
+    restart: unless-stopped
+    mem_limit: 64m
+    cpus: 0.2
+    ports:
+      - "8080:8080"
+    environment:
+      - FAIL_RATE=0

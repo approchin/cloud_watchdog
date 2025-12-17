@@ -1,0 +1,295 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.0.2, pluggy-1.6.0
+rootdir: /home/lyb/cloud-watchdog
+plugins: langsmith-0.4.59, cov-7.0.0, anyio-4.12.0
+collected 2 items
+
+tests/e2e/test_full_lifecycle.py #0 building with "default" instance using docker driver
+
+#1 [normal-app internal] load build definition from Dockerfile
+#1 transferring dockerfile: 193B done
+#1 DONE 0.0s
+
+#2 [cpu-stress internal] load build definition from Dockerfile
+#2 transferring dockerfile: 315B done
+#2 DONE 0.0s
+
+#3 [crash-loop internal] load build definition from Dockerfile
+#3 transferring dockerfile: 186B done
+#3 DONE 0.0s
+
+#4 [security-simulation internal] load build definition from Dockerfile
+#4 transferring dockerfile: 542B done
+#4 DONE 0.0s
+
+#5 [memory-extreme internal] load build definition from Dockerfile
+#5 transferring dockerfile: 317B done
+#5 DONE 0.0s
+
+#6 [unhealthy-app internal] load build definition from Dockerfile
+#6 transferring dockerfile: 248B done
+#6 DONE 0.0s
+
+#7 [memory-extreme internal] load metadata for docker.io/library/alpine:3.18
+#7 ...
+
+#8 [oom-test internal] load build definition from Dockerfile
+#8 transferring dockerfile: 437B done
+#8 DONE 0.0s
+
+#9 [restart-loop internal] load build definition from Dockerfile
+#9 transferring dockerfile: 186B done
+#9 DONE 0.0s
+
+#10 [memory-leak internal] load build definition from Dockerfile
+#10 transferring dockerfile: 317B done
+#10 DONE 0.0s
+
+#11 [cpu-extreme internal] load build definition from Dockerfile
+#11 transferring dockerfile: 315B done
+#11 DONE 0.0s
+
+#7 [cpu-extreme internal] load metadata for docker.io/library/alpine:3.18
+#7 ...
+
+#12 [security-simulation internal] load metadata for docker.io/library/python:3.9-slim
+#12 DONE 0.7s
+
+#13 [cpu-extreme internal] load .dockerignore
+#13 transferring context: 2B done
+#13 DONE 0.0s
+
+#14 [memory-leak internal] load .dockerignore
+#14 transferring context: 2B done
+#14 DONE 0.0s
+
+#15 [restart-loop internal] load .dockerignore
+#15 transferring context: 2B done
+#15 DONE 0.0s
+
+#16 [oom-test internal] load .dockerignore
+#16 transferring context: 2B done
+#16 DONE 0.0s
+
+#17 [memory-extreme internal] load .dockerignore
+#17 transferring context: 2B done
+#17 DONE 0.0s
+
+#18 [security-simulation internal] load .dockerignore
+#18 transferring context: 2B done
+#18 DONE 0.0s
+
+#19 [security-simulation 1/5] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3060f261f53f144965f755599aab1acda1e13cf1731b1b
+#19 DONE 0.0s
+
+#20 [security-simulation internal] load build context
+#20 transferring context: 2.18kB done
+#20 DONE 0.0s
+
+#21 [security-simulation 3/5] RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources 2>/dev/null || sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+#21 CACHED
+
+#22 [security-simulation 2/5] WORKDIR /app
+#22 CACHED
+
+#23 [security-simulation 4/5] COPY simulate_attack.py .
+#23 CACHED
+
+#24 [security-simulation 5/5] RUN apt-get update && apt-get install -y net-tools procps && rm -rf /var/lib/apt/lists/*
+#24 CACHED
+
+#25 [security-simulation] exporting to image
+#25 exporting layers done
+#25 writing image sha256:142e4fe25e35d42024e47d136d2e346412ea6e8bf9ff4f51fb0711555cfde946 done
+#25 naming to docker.io/library/test-containers-security-simulation done
+#25 DONE 0.0s
+
+#26 [cpu-stress internal] load .dockerignore
+#26 transferring context: 2B done
+#26 DONE 0.0s
+
+#27 [crash-loop internal] load .dockerignore
+#27 transferring context: 2B done
+#27 DONE 0.0s
+
+#7 [oom-test internal] load metadata for docker.io/library/alpine:3.18
+#7 DONE 0.8s
+
+#28 [memory-leak 1/4] FROM docker.io/library/alpine:3.18@sha256:de0eb0b3f2a47ba1eb89389859a9bd88b28e82f5826b6969ad604979713c2d4f
+#28 DONE 0.0s
+
+#29 [normal-app internal] load .dockerignore
+#29 transferring context: 2B done
+#29 DONE 0.0s
+
+#30 [memory-leak internal] load build context
+#30 transferring context: 28B done
+#30 DONE 0.0s
+
+#31 [cpu-extreme internal] load build context
+#31 transferring context: 221B done
+#31 DONE 0.0s
+
+#32 [restart-loop internal] load build context
+#32 transferring context: 434B done
+#32 DONE 0.0s
+
+#33 [oom-test internal] load build context
+#33 transferring context: 977B done
+#33 DONE 0.0s
+
+#34 [memory-extreme internal] load build context
+#34 transferring context: 310B done
+#34 DONE 0.0s
+
+#35 [cpu-extreme] exporting to image
+#35 exporting layers done
+#35 writing image sha256:f364203c4c53496d02ac6f9bdb6d9ddea5eaddb6e38b181a7574e599f3e67b59 0.0s done
+#35 naming to docker.io/library/test-containers-cpu-extreme 0.0s done
+#35 DONE 0.0s
+
+#36 [oom-test 3/4] COPY oom-test.sh /app/oom-test.sh
+#36 CACHED
+
+#37 [oom-test 4/4] RUN chmod +x /app/oom-test.sh
+#37 CACHED
+
+#38 [unhealthy-app internal] load metadata for docker.io/library/python:3.11-alpine
+#38 DONE 0.8s
+
+#39 [memory-leak] exporting to image
+#39 exporting layers done
+#39 writing image sha256:a172aaa4aa26fff96acfdbe39a37ac5843af09138eab4ff584cfe02deba93789 done
+#39 naming to docker.io/library/test-containers-memory-leak 0.0s done
+#39 DONE 0.0s
+
+#40 [memory-extreme 3/4] COPY run.sh /app/run.sh
+#40 CACHED
+
+#41 [memory-leak 4/4] RUN chmod +x /app/run.sh
+#41 CACHED
+
+#42 [crash-loop internal] load build context
+#42 transferring context: 434B done
+#42 DONE 0.0s
+
+#43 [restart-loop] exporting to image
+#43 exporting layers done
+#43 writing image sha256:84e0d14bde42f3e0627b21b163604479f9d6386550a8340f6a5d9447979cc0b3 done
+#43 naming to docker.io/library/test-containers-restart-loop 0.0s done
+#43 DONE 0.0s
+
+#44 [cpu-stress internal] load build context
+#44 transferring context: 221B done
+#44 DONE 0.0s
+
+#45 [unhealthy-app internal] load .dockerignore
+#45 transferring context: 2B done
+#45 DONE 0.0s
+
+#46 [oom-test 2/4] RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories &&     apk add --no-cache bash stress-ng
+#46 CACHED
+
+#47 [cpu-stress 3/4] COPY run.sh /app/run.sh
+#47 CACHED
+
+#48 [crash-loop 3/4] COPY run.sh /app/run.sh
+#48 CACHED
+
+#49 [crash-loop 4/4] RUN chmod +x /app/run.sh
+#49 CACHED
+
+#50 [cpu-extreme 4/4] RUN chmod +x /app/run.sh
+#50 CACHED
+
+#51 [oom-test] exporting to image
+#51 exporting layers done
+#51 writing image sha256:e6bf6fc98325fc0a35f3ae9c5b649868839494dfc7c7f847de5955093107e858 done
+#51 naming to docker.io/library/test-containers-oom-test 0.0s done
+#51 DONE 0.0s
+
+#52 [memory-extreme] exporting to image
+#52 exporting layers done
+#52 writing image sha256:bd64d3708971e6f005309a324cdb41fbce339f070fd7983c1e75f5fcb71ca18b done
+#52 naming to docker.io/library/test-containers-memory-extreme 0.0s done
+#52 DONE 0.0s
+
+#53 [cpu-stress] exporting to image
+#53 exporting layers done
+#53 writing image sha256:b4979b883f4d0c4ed656fe534b48274fa71db9701715a7d122816d75fb1b827e done
+#53 naming to docker.io/library/test-containers-cpu-stress done
+#53 DONE 0.0s
+
+#54 [normal-app internal] load build context
+#54 transferring context: 182B done
+#54 DONE 0.0s
+
+#55 [unhealthy-app 1/4] FROM docker.io/library/python:3.11-alpine@sha256:d174db33fa506083fbd941b265f7bae699e7c338c77c415f85dddff4f176d1de
+#55 resolve docker.io/library/python:3.11-alpine@sha256:d174db33fa506083fbd941b265f7bae699e7c338c77c415f85dddff4f176d1de 0.0s done
+#55 DONE 0.0s
+
+#56 [normal-app 3/4] COPY run.sh /app/run.sh
+#56 CACHED
+
+#57 [normal-app 2/4] RUN apk add --no-cache bash
+#57 CACHED
+
+#58 [normal-app 4/4] RUN chmod +x /app/run.sh
+#58 CACHED
+
+#59 [unhealthy-app internal] load build context
+#59 transferring context: 788B done
+#59 DONE 0.0s
+
+#60 [crash-loop] exporting to image
+#60 exporting layers done
+#60 writing image sha256:9fd5ebd0d5fa2a67b93fcedff875f1e74f6030007cd90251ea1b7a709da38369 done
+#60 naming to docker.io/library/test-containers-crash-loop 0.0s done
+#60 DONE 0.0s
+
+#61 [normal-app] exporting to image
+#61 exporting layers done
+#61 writing image sha256:54b267a0469c9a1581b0c29f22ed2cdb6c26de3408ba2e214ebec26b3d5de768 done
+#61 naming to docker.io/library/test-containers-normal-app 0.0s done
+#61 DONE 0.0s
+
+#62 [unhealthy-app 3/4] COPY server.py /app/server.py
+#62 CACHED
+
+#63 [unhealthy-app 2/4] RUN pip install --no-cache-dir flask
+#63 CACHED
+
+#64 [unhealthy-app 4/4] WORKDIR /app
+#64 CACHED
+
+#65 [unhealthy-app] exporting to image
+#65 exporting layers done
+#65 writing image sha256:7340e09324deb06fd140c18359a4f125bcd3278e79ecca6f06d6d80b6b132462 done
+#65 naming to docker.io/library/test-containers-unhealthy-app done
+#65 DONE 0.1s
+
+[Setup] Starting test environment...
+
+[Test] Testing Security Incident Response for security-simulation
+[Action] Triggering security check for security-simulation
+[Wait] Waiting for Agent to process task...
+[Metric] Security Response Time: 13.72 seconds
+[Success] Security incident handled correctly (Commit + Stop)
+.
+[Test] Testing Crash Loop Response for crash-loop
+[Action] Triggering liveness check for crash-loop
+  Iteration 1...
+  Iteration 2...
+  Iteration 3...
+  Iteration 4...
+  Iteration 5...
+  Iteration 6...
+[Wait] Waiting for Agent to make final decision...
+[Metric] Crash Loop Response Time: 18.71 seconds
+Container info: {'id': '3ff524aa22ef', 'name': 'crash-loop', 'image': 'test-containers-crash-loop', 'status': 'exited', 'running': False, 'restarting': False, 'paused': False, 'oom_killed': False, 'exit_code': 1, 'error': '', 'started_at': '2025-12-16T12:30:42.01395919Z', 'finished_at': '2025-12-16T12:30:46.032115955Z', 'restart_count': 6, 'restart_policy': 'unless-stopped', 'memory_limit': 67108864, 'cpu_limit': 200000000, 'ip_address': '', 'ports': {}}
+[Success] Crash loop handled correctly (Stop)
+.
+[Teardown] Stopping test environment...
+
+
+========================= 2 passed in 61.53s (0:01:01) =========================

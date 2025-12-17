@@ -1,0 +1,105 @@
+# ============================================
+# Cloud Watchdog 全局配置
+# ============================================
+
+# 系统配置
+system:
+  # 日志级别: DEBUG, INFO, WARNING, ERROR
+  log_level: "INFO"
+  
+  # 日志文件路径
+  log_file: "logs/watchdog.log"
+  
+  # 容器存活检查间隔（秒）
+  check_interval_seconds: 30
+  
+  # 资源检查间隔（秒）
+  resource_check_interval_seconds: 60
+  
+  # 证据日志行数
+  evidence_log_lines: 50
+
+# 熔断器配置
+circuit_breaker:
+  # 时间窗口内最大重启次数
+  max_restart_attempts: 3
+  
+  # 时间窗口（秒）
+  window_seconds: 300
+  
+  # 熔断后冷却时间（秒）- 熔断触发后持续监控，仍有问题则继续上报
+  cooldown_seconds: 1800
+  
+  # 熔断后动作: stop_and_notify / notify_only
+  on_exceed: "stop_and_notify"
+
+# LLM 配置（用于 LangGraph Agent 决策）
+llm:
+  # LLM 提供商: deepseek, openai, etc.
+  provider: "deepseek"
+  
+  # API Key（从环境变量读取，安全最佳实践）
+  api_key: "${DEEPSEEK_API_KEY}"
+  # api_key: "your-api-key-here"
+  
+  # API Base URL
+  base_url: "https://api.deepseek.com"
+  
+  # 模型名称
+  model: "deepseek-chat"
+  
+  # 温度参数（0-2，0表示确定性输出）
+  temperature: 0
+  
+  # 请求超时（秒）
+  timeout_seconds: 30
+  
+  # 最大重试次数
+  max_retries: 3
+
+# [已弃用] Dify 配置 - 已迁移到 LangGraph
+# dify:
+#   webhook_url: ""
+#   api_key: ""
+#   timeout_seconds: 30
+
+# 执行API配置
+executor:
+  host: "127.0.0.1"
+  port: 9999
+  # 允许的动作白名单
+  allowed_actions:
+    - "RESTART"
+    - "STOP"
+    - "INSPECT"
+    - "COMMIT"
+
+# 通知配置
+notification:
+  # 主通知渠道：email
+  primary: "email"
+  
+  # 邮件配置
+  email:
+    enabled: true
+    smtp_server: "smtp.qq.com"
+    smtp_port: 465
+    use_ssl: true
+    sender: "1738993933@qq.com"
+    password: "kwetgithifdodeje"
+    # password: "${EMAIL_PASSWORD}"
+    recipients: ["robinli0916@stu.xidian.edu.cn"]
+
+# 资源阈值（全局默认值）
+thresholds:
+  # CPU 使用率警告阈值（%）
+  cpu_warning: 70
+  
+  # CPU 使用率严重阈值（%）
+  cpu_critical: 90
+  
+  # 内存使用率警告阈值（%）
+  memory_warning: 70
+  
+  # 内存使用率严重阈值（%）
+  memory_critical: 90
