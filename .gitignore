@@ -31,3 +31,7 @@ state/*
 # OS
 .DS_Store
 Thumbs.db
+
+# 忽略根目录下的开发文档，保留 README.md
+/*.md
+!/README.md
