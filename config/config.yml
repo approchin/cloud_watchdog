@@ -85,10 +85,10 @@ notification:
     smtp_server: "smtp.qq.com"
     smtp_port: 465
     use_ssl: true
-    sender: "1738993933@qq.com"
-    password: "kwetgithifdodeje"
+    sender: "your_email@example.com"
+    password: "${EMAIL_PASSWORD}"
     # password: "${EMAIL_PASSWORD}"
-    recipients: ["robinli0916@stu.xidian.edu.cn"]
+    recipients: ["admin@example.com"]
 
 # 资源阈值（全局默认值）
 thresholds:
