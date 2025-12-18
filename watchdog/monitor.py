@@ -1,5 +1,5 @@
 """
-Docker 监控模块
+Core monitoring module for Docker container lifecycle and resource usage.
 """
 import subprocess
 import time
@@ -28,26 +28,30 @@ logger = logging.getLogger(__name__)
 
 
 class ContainerMonitor:
-    """容器监控器"""
+    """
+    Main monitoring controller.
+    Handles event listening (Docker Events API) and resource polling.
+    """
     
     def __init__(self):
         self.config = get_config()
         self.stop_event = Event()
         self.threads: List[Thread] = []
         
-        # 趋势分析历史数据 {container_name: deque([(time, mem_mb), ...])}
+        # Resource usage history for trend analysis
+        # Structure: {container_name: deque([(time, mem_mb), ...])}
         self.stats_history: Dict[str, deque] = {}
         
-        # 熔断和去重状态
-        self.report_history: Dict[str, List[datetime]] = {}  # 容器上报历史
-        self.circuit_breaker_until: Dict[str, datetime] = {}  # 熔断截止时间
-        self.last_report_time: Dict[str, datetime] = {}  # 最后上报时间（去重）
+        # Circuit breaker and deduplication state
+        self.report_history: Dict[str, List[datetime]] = {}
+        self.circuit_breaker_until: Dict[str, datetime] = {}
+        self.last_report_time: Dict[str, datetime] = {}
         
-        # 构建容器名称集合，提升 _is_monitored 查询效率
+        # Cache monitored container names for O(1) lookup
         self._monitored_names: set = {c.name for c in self.config.containers}
     
     def start(self):
-        """启动监控"""
+        """Initialize and start monitoring threads."""
         logger.info("启动容器监控...")
         
         polling_thread = Thread(target=self._polling_loop, daemon=True)
